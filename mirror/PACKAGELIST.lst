@@ -1,0 +1,7 @@
+Name:pack
+FileName:pack.pkg
+Version:1.0
+Architecture:all
+Maintainer:HighStudios
+Description: A example package for developers
+Depends:none
