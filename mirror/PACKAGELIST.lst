@@ -5,3 +5,27 @@ Architecture:all
 Maintainer:HighStudios
 Description: A example package for developers
 Depends:none
+
+Name:arm64/bash
+FileName:bash.pkg
+Version:1.0
+Architecture:arm64
+Maintainer:GNU
+Description:Bash Shell
+Depends:none
+
+Name:arm64/sudo
+FileName:sudo.pkg
+Version:1.0
+Architecture:arm64
+Maintainer:Slackware
+Description:none
+Depends:none
+
+Name:arm64/gettext
+FileName:gettext.pkg
+Version:1.0
+Architecture:arm64
+Maintainer:Slackware
+Description:lib
+Depends:none
