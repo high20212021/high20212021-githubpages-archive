@@ -10,7 +10,7 @@ import os
 class TextEditor:
     def __init__(self, root):
         self.root = root
-        self.root.title("CodeStudio 2023.10")
+        self.root.title("CodeStudio 2023.10.1")
         self.text_area = tk.Text(self.root, undo=True)
         self.text_area.pack(fill=tk.BOTH, expand=True)
 
@@ -42,30 +42,15 @@ class TextEditor:
         self.sef_menu = tk.Menu(self.menu_bar, tearoff=0)
         self.sef_menu.add_command(label="启动终端", command=self.run_terminal)
         self.sef_menu.add_command(label="启动文件管理器", command=self.launch_fm)
-        self.sef_menu.add_separator()
-        self.sef_menu.add_command(label="构建(gcc)", command=self.gcc_compile)
-        self.sef_menu.add_command(label="构建(javac)", command=self.javac_compile)
+        self.sef_menu.add_command(label="Python Shell(IDLE)", command=self.launch_pyle)
         self.menu_bar.add_cascade(label="操作", menu=self.sef_menu)
-        """
-        # 高亮
-        self.style_menu = tk.Menu(self.menu_bar, tearoff=0)
-        style = tk.StringVar()
-        style.set("friendly")
-        self.style_menu.add_radiobutton(label="默认", variable=style)
-        self.style_menu.add_radiobutton(label="友好", variable=style)
-        self.style_menu.add_radiobutton(label="炫彩", variable=style)
-        self.menu_bar.add_cascade(label="主题", menu=self.style_menu)
-
-        # 高亮-选择部分
-        self.language_menu = tk.Menu(self.menu_bar, tearoff=0)
-        language_menu = tk.Menu(self.menu_bar)
-        self.menu_bar.add_cascade(label="语法", menu=language_menu)
-        language = tk.StringVar()
-        language.set("python")
-        self.language_menu.add_radiobutton(label="Python", variable=language)
-        self.language_menu.add_radiobutton(label="C", variable=language)
-        self.language_menu.add_radiobutton(label="C++", variable=language)
-"""
+        # Build Menu
+        self.build_menu = tk.Menu(self.menu_bar, tearoff=0)
+        self.build_menu.add_command(label="构建(gcc)", command=self.gcc_compile)
+        self.build_menu.add_command(label="构建(javac)", command=self.javac_compile)
+        self.build_menu.add_command(label="构建(rustc)", command=self.rust_compile)
+        self.build_menu.add_command(label="构建(mono-mcs)", command=self.mcs_run)
+        self.menu_bar.add_cascade(label="构建", menu=self.build_menu)
         # 创建帮助菜单
         self.help_menu = tk.Menu(self.menu_bar, tearoff=0)
         self.help_menu.add_command(label="关于", command=self.show_about)
@@ -136,12 +121,21 @@ class TextEditor:
         file_path = filedialog.askopenfilename(filetypes=[("Java文件", "*.java")])
         os.system(f"javac {file_path}")
 
+    def launch_pyle(self):
+        os.system(f"idle")
+
+    def rust_compile(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Rust文件", "*.rs")])
+        os.system(f"rustc {file_path}")
+
+    def mcs_run(self):
+        file_path = filedialog.askopenfilename(filetypes=[("C#文件", "*.cs")])
+        os.system(f"mcs {file_path}")
+
     def show_about(self):
-        messagebox.showinfo("关于","CodeStudio 23.10")
+        messagebox.showinfo("关于","CodeStudio 23.10.1")
 
 root = tk.Tk()
 editor = TextEditor(root)
 root.iconbitmap('')
-# while True:
-#     root.highlight_code()
 root.mainloop()
