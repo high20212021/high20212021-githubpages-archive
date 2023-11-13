@@ -1,4 +1,8 @@
 #!/usr/bin/bash
+echo "安装前预备"
+echo "1.请确保你有能够连接到GitHub的网络，安装过程中需要它"
+echo "2.请勤更新脚本"
+pause
 if ! command -v dialog &> /dev/null; then
     echo "脚本关键依赖项没有检查到：dialog"
     exit 1
@@ -20,6 +24,7 @@ options=(
     5 "退出"
 )
 function function1() {
+clear
 sudo dpkg --add-architecture armhf
 sudo apt update
 sudo apt upgrade
@@ -27,8 +32,9 @@ sudo apt install cmake make gcc clang git wget nano neovim vim automake autoconf
 sudo apt install zenity:armhf libegl-mesa0:armhf libgl1-mesa-dri:armhf libglapi-mesa:armhf libglx-mesa0:armhf libasound2:armhf libstdc++6:armhf libtcmalloc-minimal4:armhf gcc-arm-linux-gnueabihf sl:armhf -y
 }
 function build() {
-git clone https://ghproxy.com/https://github.com/ptitSeb/box86
-git clone https://ghproxy.com/https://github.com/ptitSeb/box64
+clear
+git clone https://github.com/ptitSeb/box86
+git clone https://github.com/ptitSeb/box64
 cd box86
 mkdir build
 cd build
@@ -45,6 +51,7 @@ sudo make -j8
 sudo make install
 }
 function getwin() {
+clear
 cd ..
 cd ..
 wget https://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-amd64/PlayOnLinux-wine-6.14-upstream-linux-amd64.tar.gz
@@ -59,6 +66,7 @@ ln -s ~/wine32/bin/wine wine32
 cd ~/
 }
 function startwine() {
+    clear
     echo "请在图形界面检查状态"
     box86 wine taskmgr
 }
