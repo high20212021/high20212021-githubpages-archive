@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        textarea {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    <title>ZtehText</title>
+</head>
+<body>
+    <button id="saveButton">保存</button>
+    <button id="openButton">打开</button>
+    <label for="filename">保存的文件名：</label>
+    <input type="text" id="filename" placeholder="输入文件名">
+    <textarea id="editor"></textarea>
+
+    <script>
+        // 获取文本编辑器元素
+        var editor = document.getElementById("editor");
+
+        // 获取保存按钮元素
+        var saveButton = document.getElementById("saveButton");
+
+        // 获取加载按钮元素
+        var loadButton = document.getElementById("loadButton");
+
+        saveButton.addEventListener("click", function() {
+            var text = editor.value;
+
+            // 获取用户输入的文件名
+            var filename = filenameInput.value || "default.txt";
+
+            // 创建一个Blob对象，表示文件内容
+            var blob = new Blob([text], { type: "text/plain" });
+
+            // 创建一个a元素，用于下载
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+
+            // 将a元素添加到文档中
+            document.body.appendChild(a);
+
+            // 模拟点击下载链接
+            a.click();
+
+            // 将a元素从文档中移除
+            document.body.removeChild(a);
+
+            alert("文本已保存！");
+        });
+      
+        openButton.addEventListener("click", function() {
+            var fileInput = document.createElement("input");
+            fileInput.type = "file";
+
+            fileInput.addEventListener("change", function() {
+                var file = fileInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    editor.value = e.target.result;
+                    alert("文件已打开！");
+                };
+
+                reader.readAsText(file);
+            });
+
+            fileInput.click();
+        });
+    </script>
+</body>
+</html>
