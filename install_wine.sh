@@ -2,7 +2,7 @@
 echo "安装前预备"
 echo "1.请确保你有能够连接到GitHub的网络，安装过程中需要它"
 echo "2.请勤更新脚本"
-pause
+sleep 1
 if ! command -v dialog &> /dev/null; then
     echo "脚本关键依赖项没有检查到：dialog"
     exit 1
@@ -21,7 +21,8 @@ options=(
     2 "安装架构转译框架"
     3 "安装Wine本体"
     4 "启动Wine-Arm"
-    5 "退出"
+    5 "更新脚本"
+    6 "退出"
 )
 function function1() {
 clear
@@ -65,6 +66,11 @@ cd /usr/bin
 ln -s ~/wine32/bin/wine wine32
 cd ~/
 }
+function updatescpt() {
+    rm install_wine.sh
+    wget https://high20212021.github.io/install_wine.sh
+    echo 更新完毕
+}
 function startwine() {
     clear
     echo "请在图形界面检查状态"
@@ -86,6 +92,9 @@ while true; do
             startwine
             ;;
         5)
+            updatescpt
+            ;;
+        6)
             break
             ;;
         *)
